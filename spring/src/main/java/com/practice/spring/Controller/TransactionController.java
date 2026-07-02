@@ -16,7 +16,7 @@ import java.util.Collection;
 
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/api/transactions/")
 public class TransactionController{
     @Autowired
     TransactionService transService;
