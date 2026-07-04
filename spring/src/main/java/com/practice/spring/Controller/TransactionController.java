@@ -1,5 +1,6 @@
 package com.practice.spring.Controller;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,11 +19,12 @@ import java.util.Collection;
 @RestController
 @RequestMapping("/api/transactions/")
 public class TransactionController{
+
     @Autowired
     TransactionService transService;
 
     @PostMapping
-    public Transaction addTransaction(@RequestBody TransactionDTO rb ){
+    public Transaction addTransaction(@Valid @RequestBody TransactionDTO rb ){
         return transService.saveTransaction(rb);
     }
     @GetMapping

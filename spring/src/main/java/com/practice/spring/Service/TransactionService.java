@@ -19,11 +19,10 @@ public class TransactionService{
     public Transaction saveTransaction(TransactionDTO trans){
         Transaction transaction = new Transaction();
         transaction.setTimeStamp(LocalDateTime.now());
-        if(trans.getAmount()>10000 || trans.getAmount()<0)
+        if(trans.getAmount()>10000)
             transaction.setStatus("Fraud");
         else
             transaction.setStatus("Approved");
-        transaction.setTransactionId(UUID.randomUUID().toString());
         transaction.setAmount(trans.getAmount());
         transaction.setLocation(trans.getLocation());
         transaction.setCardId(trans.getCardId());
@@ -31,9 +30,9 @@ public class TransactionService{
     }
 
     public Collection<Transaction> getTransaction(){
-        return transactionRepo.getTransaction();
+        return transactionRepo.findAll();
     }
     public Transaction getTransactionId(String id){
-        return transactionRepo.getTransactionById(id);
+        return transactionRepo.findById(id).orElse(null);
     }
 }
